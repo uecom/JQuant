@@ -13,10 +13,10 @@ public class StockDataTest {
 
     @Test
     public void testStockData() throws StockDataParseException {
-        StockData stockData = Provider.realtimeData("000001");
+        StockData stockData = Provider.realtimeData("000063");
         System.out.println("股票名称:" + stockData.name);
         System.out.println("股票代码:" + stockData.symbol);
-        for(Map.Entry<String,Double> data : stockData.entrySet()){
+        for (Map.Entry<String, Double> data : stockData.entrySet()) {
             System.out.println(data.getKey() + "=" + data.getValue());
         }
         System.out.println(stockData);

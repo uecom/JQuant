@@ -1,10 +1,7 @@
 package net.jquant.provider;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import net.jquant.common.StockConstants;
 import net.jquant.common.StockDataParseException;
 import net.jquant.common.Utils;
@@ -12,9 +9,6 @@ import net.jquant.downloader.Downloader;
 import net.jquant.downloader.THSJSDownloader;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,7 +99,8 @@ public class DailyDataProvider {
      * @param stopDate yyyyMMdd
      * @return data list
      */
-    public static List<StockData> get(String symbol,String startDate,String stopDate) throws StockDataParseException {
+    @SuppressWarnings("unchecked")
+	public static List<StockData> get(String symbol,String startDate,String stopDate) throws StockDataParseException {
         String lastUrl = "http://d.10jqka.com.cn/v2/line/hs_%s/01/last.js";
         Map<String, Object> stringObjectMap = THSJSDownloader.download(lastUrl, symbol);
         Map<String, String> years = (Map<String, String>) stringObjectMap.get("year");
@@ -139,7 +134,8 @@ public class DailyDataProvider {
         return stockDatas;
     }
 
-    private static StockData today(String symbol) throws StockDataParseException{
+    @SuppressWarnings("unchecked")
+	private static StockData today(String symbol) throws StockDataParseException{
         String url = "http://d.10jqka.com.cn/v2/line/hs_%s/01/today.js";
         Map<String, Object> download = THSJSDownloader.download(url, symbol);
         if(download == null || download.size() == 0){
